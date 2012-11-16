@@ -51,7 +51,7 @@ define(['gwparameter'],
         if (this.seaLevel > this.seaLevelMax) {
             this.seaLevel = this.seaLevelMax;
         }
-        
+
         this.coConcentration += 10; // TODO: real calculation        
         this.floodingDistance = this.initialFloodingDistance + this.seaLevel * this.floodingPerSeaLevel;
     }
