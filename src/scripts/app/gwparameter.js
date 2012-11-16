@@ -30,6 +30,9 @@ define(function() {
     GlobalWarmingParameter.prototype.getValue = function() {
         return this.value;
     };
+     GlobalWarmingParameter.prototype.setValue = function(value) {
+        this.value = value;
+    };
     GlobalWarmingParameter.prototype.getCoMultiplier = function() {
         return this.coMultiplier;
     };

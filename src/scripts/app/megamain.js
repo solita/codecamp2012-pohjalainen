@@ -1,28 +1,35 @@
 
-define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer'], 
-	function($, GlobalWarmingParameter, htmlutils, FpsTimer) {
+define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'], 
+	function($, GlobalWarmingParameter, htmlutils, FpsTimer, GlobalWarmingModel) {
 		var parameters = new Array(		  
-			new GlobalWarmingParameter("kökkötraktori", 1, 5, 4, 1000),
-			new GlobalWarmingParameter("auto", 1, 5, 4, 100),
-			new GlobalWarmingParameter("sähkönkulutus", 1, 5000, 1500, 1)
+			new GlobalWarmingParameter("tractor", 1, 5, 4, 1000),
+			new GlobalWarmingParameter("car", 1, 5, 4, 100),
+			new GlobalWarmingParameter("electricity", 1, 5000, 1500, 1)
 		);
+
+		var gwm = new GlobalWarmingModel(parameters);
+
 		var timer = new FpsTimer(50);
 
 	    var megamain = {
 	    	init: function() {
-	    		 var p = parameters[0];
+	    		 var p = parameters.kökkötraktori;
 
-			     htmlutils.add(parameters[0]);
-			     htmlutils.add(parameters[1]);
-			     htmlutils.add(parameters[2]);
-
+	    		for (var i in parameters) {
+			     	htmlutils.add(parameters[i]);
+			     }
+			     
 			     setInterval(draw, 100); // 10 fps target 
 	    	}
 	    }
 
 	    var draw = function() {
 	    	timer.refreshFps();
-	    	console.log(timer.getFps());
+
+	    	for (var i in parameters) {
+	    		parameters[i].setValue(htmlutils.getValue(parameters[i].getName()));
+	    	}
+	    	gwm.updateState();
 	    }
 
 	    return megamain;
