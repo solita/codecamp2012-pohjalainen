@@ -10,6 +10,7 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 		var gwm = new GlobalWarmingModel(parameters);
 
 		var timer = new FpsTimer(50);
+		var currentFrame = 0;
 
 	    var megamain = {
 	    	init: function() {
@@ -25,13 +26,17 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 
 	    var draw = function() {
 	    	timer.refreshFps();
+	    	currentFrame += 1;
 
 	    	for (var i in parameters) {
 	    		parameters[i].setValue(htmlutils.getValue(parameters[i].getName()));
 	    	}
 	    	gwm.updateState();
 
-	    	$("#status").text("pitoisuus: " + gwm.getCoConcentration() + ". Sea level: " + gwm.getSeaLevel() + ". Flooding distance: " + gwm.getFloodingDistance());
+	    	$("#status").text("pitoisuus: " + gwm.getCoConcentration() + ". Sea level: " + gwm.getSeaLevel() + ". Flooding distance: " + gwm.getFloodingDistance()
+	    		+ ". Temperature change: " + gwm.getTemperatureChange() +
+	    		". Years passed : " + currentFrame
+	    		);
 	    }
 
 	    return megamain;

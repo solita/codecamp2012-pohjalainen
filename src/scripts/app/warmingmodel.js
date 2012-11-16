@@ -5,17 +5,18 @@ define(['gwparameter'],
         var coConcentration; // current value 
         var seaLevel; // current sea level
         var floodingDistance; // current flooding distance;
-        var temperatureIncrease; // avg temp increase
+        var temperatureChange; // avg temp increase
 
         // calculation params      
         var initialCoConcentration = 200;
-        var initialTemperatureIncrease = 0;
+        var initialtemperatureChange = 0;
         var initialFloodingDistance = 10; // 10 metriä rannasta normaalisti
         var coDecreaseFromSinks = 3000; // metsät yms. hiilinielut imee 
         var initialSeaLevel = 0;
         var seaLevelMax = 10; // 10 metriä jos kaikki jää sulaa
         var tempIncreasePoint = 300; // lämpötilan nousu
         var arcticIceMeltingPoint = 0.3; // 0.3 celciusta -> tästä alkaa sulaminen
+        var arcticIceFreezingPoint = -0.3;
         var floodingPerSeaLevel = 10; // 10 metriä lisää tulviin per 1 metri sulanutta jäätä
 
 	// rakentaja
@@ -24,7 +25,7 @@ define(['gwparameter'],
         this.coConcentration = initialCoConcentration;
         this.floodingDistance = initialFloodingDistance;
         this.seaLevel = initialSeaLevel;
-        this.temperatureIncrease = initialTemperatureIncrease;
+        this.temperatureChange = initialtemperatureChange;
     	return (this);
 	}
 
@@ -40,19 +41,42 @@ define(['gwparameter'],
         return this.floodingDistance;
     }
 
+    GlobalWarmingModel.prototype.getTemperatureChange = function() {
+        return this.temperatureChange;
+    }
+
+
     // global warming etenee, kapitalismi mätänee
     GlobalWarmingModel.prototype.updateState = function() {
         if (this.coConcentration > tempIncreasePoint) {
-            this.temperatureIncrease += ((this.coConcentration - tempIncreasePoint) / 500);
+            this.temperatureChange += ((this.coConcentration - tempIncreasePoint) / 50000);
+        } else {
+            this.temperatureChange -= 0.1;
         }
-        if (this.temperatureIncrease > arcticIceMeltingPoint) {
-            this.seaLevel += ((this.temperatureIncrease - arcticIceMeltingPoint) / 100);
+        if (this.temperatureChange > 3) {
+            this.temperatureChange = 3;
+        }
+        if (this.temperatureChange < -3) {
+            this.temperatureChange = -3;
+        }
+        if (this.temperatureChange > arcticIceMeltingPoint) {
+            this.seaLevel += ((this.temperatureChange - arcticIceMeltingPoint) / 100);
+        }
+        if (this.temperatureChange < arcticIceFreezingPoint) {
+            this.seaLevel += ((this.temperatureChange - arcticIceFreezingPoint) / 100);
         }
         if (this.seaLevel > seaLevelMax) {
             this.seaLevel = seaLevelMax;
         }
+        if (this.seaLevel < 0 ) {
+            this.seaLevel = 0;
+        }
 
-        this.coConcentration += 10; // TODO: real calculation        
+        this.coConcentration += this.params[0].getEmission() - coDecreaseFromSinks;
+        if (this.coConcentration < initialCoConcentration) {
+            this.coConcentration = initialCoConcentration;
+        }
+
         this.floodingDistance = initialFloodingDistance + (this.seaLevel * floodingPerSeaLevel);
     }
 
