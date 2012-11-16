@@ -1,12 +1,11 @@
 #ukko {
 	float: left;
-	width: 50%;
+	width: 33%;
 }
 
 #sliders {
 	float: left;
-	width: 30%;
-	padding-left: 20px;
+	width: 33%;
 }
 
 #kartta {
@@ -18,6 +17,11 @@
 	float: left;
 	width: 30%;
 	padding-left: 20px;
+}
+
+#vibrations {
+	float: left;
+	width: 33%;
 }
 
 .wrapper {
