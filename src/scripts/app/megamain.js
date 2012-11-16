@@ -34,11 +34,11 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 	    	gwm.updateState();
 
 	    	$("#status").html(
-	    		"pitoisuus: " + gwm.getCoConcentration() + 
-	    		".<br /> Sea level: " + gwm.getSeaLevel() + 
-	    		".<br /> Flooding distance: " + gwm.getFloodingDistance() + 
-	    		".<br /> Temperature change: " + gwm.getTemperatureChange() +
-	    		".<br /> Years passed : " + currentFrame
+	    		"pitoisuus: <b>" + gwm.getCoConcentration() + "</b>" + 
+	    		".<br /> Sea level: <b>" + gwm.getSeaLevel() + "</b>" +
+	    		".<br /> Flooding distance: <b>" + gwm.getFloodingDistance() + "</b>"+ 
+	    		".<br /> Temperature change: <b>" + gwm.getTemperatureChange() + "</b>" +
+	    		".<br /> Years passed : <b>" + currentFrame + "</b>"
 	    		);
 
 	   		drawBox(gwm.getFloodingDistance(),250); //TODO get values
