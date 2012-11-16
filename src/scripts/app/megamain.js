@@ -20,6 +20,7 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 			     }
 
 			     setInterval(draw, 100); // 10 fps target 
+			     drawBox(500,500, "land"); //TODO get values
 	    	}
 	    }
 
@@ -32,6 +33,24 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 	    	gwm.updateState();
 
 	    	$("#status").text("pitoisuus: " + gwm.getCoConcentration() + ". Sea level: " + gwm.getSeaLevel() + ". Flooding distance: " + gwm.getFloodingDistance());
+	   		drawBox(42,42, "river"); //TODO get values
+	    }
+
+	    var drawBox = function(width, height,name) {
+	    	
+			if (name == "river") {
+				var c=document.getElementById("river");
+				var ctx=c.getContext("2d");
+				ctx.fillStyle="#0051ff"; 
+				ctx.fillRect(0,0,width,height);
+			}
+			else {
+				var c=document.getElementById("land");
+				var ctx=c.getContext("2d");
+				ctx.fillStyle="#a73e25";
+				ctx.fillRect(0,0,width,height);
+			}
+			ctx.fillRect(0,0,width,height);
 	    }
 
 	    return megamain;
