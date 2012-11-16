@@ -72,7 +72,11 @@ define(['gwparameter'],
             this.seaLevel = 0;
         }
 
-        this.coConcentration += this.params[0].getEmission() - coDecreaseFromSinks;
+        for (var i = 0; i<this.params.length; i++) {
+            this.coConcentration += this.params[i].getEmission();
+        }
+        this.coConcentration -= coDecreaseFromSinks;
+
         if (this.coConcentration < initialCoConcentration) {
             this.coConcentration = initialCoConcentration;
         }
