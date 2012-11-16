@@ -40,13 +40,6 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 	    		);
 
 	   		drawBox(gwm.getCoConcentration()/10,250, "river"); //TODO get values
-
-	   		if (gwm.getTemperatureChange() > 1.5) {
-	   			$("#statusimg").prop("src", "img/pohjalainen_ulkoilee.jpeg");
-	   		}
-	   		else {
-		   		$("#statusimg").prop("src", "img/luutonen6.jpg");
-		   	}
 	    }
 
 	    var drawBox = function(width, height,name) {
