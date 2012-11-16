@@ -13,7 +13,7 @@ define(['gwparameter'],
         var initialFloodingDistance = 10; // 10 metriä rannasta normaalisti
         var coDecreaseFromSinks = 3000; // metsät yms. hiilinielut imee 
         var initialSeaLevel = 0;
-        var seaLevelMax = 10; // 10 metriä jos kaikki jää sulaa
+        var seaLevelMax = 20; // 10 metriä jos kaikki jää sulaa
         var tempIncreasePoint = 300; // lämpötilan nousu
         var arcticIceMeltingPoint = 0.3; // 0.3 celciusta -> tästä alkaa sulaminen
         var arcticIceFreezingPoint = -0.3;
