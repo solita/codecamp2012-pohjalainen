@@ -1,10 +1,12 @@
 require.config({
-  paths: {
-    "app": "app"
-  }
+	baseUrl: 'scripts/app',
+	paths: {
+	      lib: '../lib'
+		},
+	    urlArgs: "timestamp=" + new Date().getTime()
 })
 
-require(['lib/jquery-1.8.2.min', 'app/gwparameter'], 
+require(['lib/jquery-1.8.2.min', 'gwparameter'], 
 	function($, gw) {
 		alert(gw.getMin());
 });
