@@ -33,9 +33,12 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 	    	}
 	    	gwm.updateState();
 
-	    	$("#status").text("pitoisuus: " + gwm.getCoConcentration() + ". Sea level: " + gwm.getSeaLevel() + ". Flooding distance: " + gwm.getFloodingDistance()
-	    		+ ". Temperature change: " + gwm.getTemperatureChange() +
-	    		". Years passed : " + currentFrame
+	    	$("#status").html(
+	    		"pitoisuus: " + gwm.getCoConcentration() + 
+	    		".<br /> Sea level: " + gwm.getSeaLevel() + 
+	    		".<br /> Flooding distance: " + gwm.getFloodingDistance() + 
+	    		".<br /> Temperature change: " + gwm.getTemperatureChange() +
+	    		".<br /> Years passed : " + currentFrame
 	    		);
 
 	   		drawBox(gwm.getFloodingDistance(),250); //TODO get values
@@ -49,15 +52,26 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 	    }
 
 	    var drawBox = function(width, height,name) {
+
+	    		var img = new Image();   // Create new img element
+				img.src = 'img/kartta.jpeg'; // Set source path
+
+				img.onload = function(){
 				var land=document.getElementById("land");
 				var ctx=land.getContext("2d");
-				ctx.fillStyle="#a73e25";
-				ctx.fillRect(0,0,200,250);
+
+				ctx.save();
+				ctx.rotate(Math.PI / 2);
+				ctx.drawImage(img,0,-200);
+				//ctx.fillStyle="#a73e25";
+				//ctx.fillRect(0,0,200,250);
+
+				ctx.restore();
 
 				ctx.fillStyle="#0051ff"; 
 				ctx.fillRect(200/2-width/2,0,width,height);
 
-
+				}
 
 	    }
 
