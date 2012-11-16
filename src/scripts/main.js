@@ -6,10 +6,8 @@ require.config({
 	    urlArgs: "timestamp=" + new Date().getTime()
 })
 
-require(['jquery', 'gwparameter'], 
-	function($, GlobalWarmingParameter) {
-	    var p = new GlobalWarmingParameter("kökkötraktori");
 
-	    $("#traktori").prop("min", p.getMin());
-	    $("#traktori").prop("max", p.getMax());
+require(['megamain'], 
+	function(main) {
+	   main.init();
 });
