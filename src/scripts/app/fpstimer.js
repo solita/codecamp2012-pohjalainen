@@ -1,6 +1,4 @@
 define(function() {
-
-
 	var fps = 0, startTime=new Date(), now, lastUpdate = (new Date())*1 - 1;
 	// The higher this value, the less the FPS will be affected by quick changes
 	// Setting this to 1 will show you the FPS of the last sampled frame only
