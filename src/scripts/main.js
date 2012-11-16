@@ -7,7 +7,9 @@ require.config({
 })
 
 require(['jquery', 'gwparameter'], 
-	function($, gw) {
-		$("#traktori").prop("min", gw.getMin());
-		$("#traktori").prop("max", gw.getMax());
+	function($, GlobalWarmingParameter) {
+	    var p = new GlobalWarmingParameter("kökkötraktori");
+
+	    $("#traktori").prop("min", p.getMin());
+	    $("#traktori").prop("max", p.getMax());
 });

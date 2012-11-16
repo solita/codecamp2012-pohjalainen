@@ -6,19 +6,31 @@ define(function() {
         var coMultiplier = 1000; // 1000g * size
         var rangeMin = 1;
         var rangeMax = 5;
-        return {
-            getName: function() {
-            	return this.name;
-            },
-            getMin: function() {
-            	return rangeMin;
-            },
-            getMax: function() {
-            	return rangeMax;
-            },
-            getEmission: function() {
+	// rakentaja
+	function GlobalWarmingParameter(name) {
+	  this.name = name;
+	  return (this);
+	}
+	
+	
+	GlobalWarmingParameter.prototype.getName = function() {
+            	return name;
+	};
+	GlobalWarmingParameter.prototype.getMin = function() {
+	    return rangeMin;
+	};
+	GlobalWarmingParameter.prototype.getMax = function() {
+	    return rangeMax;
+	};
+	return (GlobalWarmingParameter);
+
+	/*
+            getEmission : function() {
             	return coMultiplier * size;
             }
+	*/
+
+
         }
-    }
+    
 );
