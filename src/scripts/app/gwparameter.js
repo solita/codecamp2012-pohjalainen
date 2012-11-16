@@ -16,22 +16,22 @@ define(function() {
 	}
 	
 	GlobalWarmingParameter.prototype.getName = function() {
-            	return name;
+            	return this.name;
 	};
 	GlobalWarmingParameter.prototype.getMin = function() {
-	    return rangeMin;
+	    return this.rangeMin;
 	};
     GlobalWarmingParameter.prototype.getMax = function() {
-        return rangeMax;
+        return this.rangeMax;
     };
     GlobalWarmingParameter.prototype.getEmission = function() {
-        return value * coMultiplier;
+        return this.value * this.coMultiplier;
     };
     GlobalWarmingParameter.prototype.getValue = function() {
-        return value;
+        return this.value;
     };
     GlobalWarmingParameter.prototype.getCoMultiplier = function() {
-        return coMultiplier;
+        return this.coMultiplier;
     };
 
 	return (GlobalWarmingParameter);
