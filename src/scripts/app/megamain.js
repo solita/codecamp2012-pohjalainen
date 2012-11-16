@@ -1,4 +1,3 @@
-
 define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'], 
 	function($, GlobalWarmingParameter, htmlutils, FpsTimer, GlobalWarmingModel) {
 		var parameters = new Array(		  
@@ -21,7 +20,7 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 			     }
 
 			     setInterval(draw, 100); // 10 fps target 
-			     drawBox(500,500, "land"); //TODO get values
+
 	    	}
 	    }
 
@@ -39,25 +38,28 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 	    		". Years passed : " + currentFrame
 	    		);
 
-	   		drawBox(gwm.getCoConcentration()/10,250, "river"); //TODO get values
+	   		drawBox(gwm.getFloodingDistance(),250); //TODO get values
+
+	   		if (gwm.getTemperatureChange() > 1.5) {
+	   			$("#statusimg").prop("src", "img/pohjalainen_ulkoilee.jpeg");
+	   		}
+	   		else {
+		   		$("#statusimg").prop("src", "img/luutonen6.jpg");
+		   	}
 	    }
 
 	    var drawBox = function(width, height,name) {
-	    	
-			if (name == "river") {
-				var c=document.getElementById("river");
-				var ctx=c.getContext("2d");
+				var land=document.getElementById("land");
+				var ctx=land.getContext("2d");
+				ctx.fillStyle="#a73e25";
+				ctx.fillRect(0,0,200,250);
+
 				ctx.fillStyle="#0051ff"; 
 				ctx.fillRect(200/2-width/2,0,width,height);
-			}
-			else {
-				var c=document.getElementById("land");
-				var ctx=c.getContext("2d");
-				ctx.fillStyle="#a73e25";
-				ctx.fillRect(0,0,width,height);
-			}
+
+
+
 	    }
 
 	    return megamain;
 });
-
