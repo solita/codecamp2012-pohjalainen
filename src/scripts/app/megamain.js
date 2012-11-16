@@ -1,9 +1,9 @@
 define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'], 
 	function($, GlobalWarmingParameter, htmlutils, FpsTimer, GlobalWarmingModel) {
 		var parameters = new Array(		  
-			new GlobalWarmingParameter("tractor", 1, 5, 4, 1000),
-			new GlobalWarmingParameter("car", 1, 5, 4, 100),
-			new GlobalWarmingParameter("electricity", 1, 5000, 1500, 1)
+			new GlobalWarmingParameter("tractor", 1, 5, 3, 1000),
+			new GlobalWarmingParameter("car", 1, 5, 3, 100),
+			new GlobalWarmingParameter("electricity", 1, 3000, 1000, 1)
 		);
 
 		var gwm = new GlobalWarmingModel(parameters);
@@ -19,7 +19,7 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 			     	htmlutils.add(parameters[i]);
 			     }
 
-			     setInterval(draw, 100); // 10 fps target 
+			     setInterval(draw, 1000/3); // 3 fps target 
 
 	    	}
 	    }
