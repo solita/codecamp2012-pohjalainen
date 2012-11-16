@@ -43,12 +43,21 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 
 	   		drawBox(gwm.getFloodingDistance(),250); //TODO get values
 
-	   		if (gwm.getTemperatureChange() > 1.5) {
-	   			$("#statusimg").prop("src", "img/pohjalainen_ulkoilee.jpeg");
-	   		}
-	   		else {
-		   		$("#statusimg").prop("src", "img/luutonen6.jpg");
+	   		var statusImage = "luutonen6.jpg";
+	   		if (gwm.getTemperatureChange() < -2) {
+			   	statusImage="talvikalassa.gif";
+			} else if (gwm.getTemperatureChange() < -1) {
+		   		statusImage="syrjahyppyja1.jpg";
+		   	} else if (gwm.getTemperatureChange() < 0) {
+		   		statusImage ="harma1.jpg";
+		   	} else if (gwm.getTemperatureChange() < 1) {
+		   		statusImage = "luutonen6.jpg";
+		   	} else if (gwm.getTemperatureChange() < 1) {
+		   		statusimage="pohjalainen_ulkoilee.jpeg";
+		   	} else {
+		   		statusImage="tulvaa.jpg";
 		   	}
+		   	$("#statusimg").prop("src", "img/" + statusImage);
 	    }
 
 	    var drawBox = function(width, height,name) {
