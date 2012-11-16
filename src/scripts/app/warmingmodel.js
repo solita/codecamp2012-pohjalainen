@@ -29,31 +29,31 @@ define(['gwparameter'],
 	}
 
     GlobalWarmingModel.prototype.getCoConcentration = function() {
-        return coConcentration;
+        return this.coConcentration;
     }
 
     GlobalWarmingModel.prototype.getSeaLevel = function() {
-        return seaLevel;
+        return this.seaLevel;
     }
     
     GlobalWarmingModel.prototype.getFloodingDistance = function() {
-        return floodingDistance;
+        return this.floodingDistance;
     }
 
     // global warming etenee, kapitalismi mätänee
     GlobalWarmingModel.prototype.updateState = function() {
-        if (coConcentration > tempIncreasePoint) {
-            temperatureIncrease += ((coConcentration - tempIncreasePoint) / 500);
+        if (this.coConcentration > this.tempIncreasePoint) {
+            this.temperatureIncrease += ((this.coConcentration - this.tempIncreasePoint) / 500);
         }
-        if (temperatureIncrease > arcticIceMeltingPoint) {
-            seaLevel += ((temperatureIncrease - arcticIceMeltingPoint) / 100);
+        if (this.temperatureIncrease > this.arcticIceMeltingPoint) {
+            this.seaLevel += ((this.temperatureIncrease - this.arcticIceMeltingPoint) / 100);
         }
-        if (seaLevel > seaLevelMax) {
-            seaLevel = seaLevelMax;
+        if (this.seaLevel > this.seaLevelMax) {
+            this.seaLevel = this.seaLevelMax;
         }
         
-        coConcentration += 10; // TODO: real calculation        
-        floodingDistance = initialFloodingDistance + seaLevel * floodingPerSeaLevel;
+        this.coConcentration += 10; // TODO: real calculation        
+        this.floodingDistance = this.initialFloodingDistance + this.seaLevel * this.floodingPerSeaLevel;
     }
 
 	return (GlobalWarmingModel);

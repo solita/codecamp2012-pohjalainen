@@ -18,7 +18,7 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 	    		for (var i in parameters) {
 			     	htmlutils.add(parameters[i]);
 			     }
-			     
+
 			     setInterval(draw, 100); // 10 fps target 
 	    	}
 	    }
@@ -30,6 +30,10 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 	    		parameters[i].setValue(htmlutils.getValue(parameters[i].getName()));
 	    	}
 	    	gwm.updateState();
+
+	    	console.log(gwm.getCoConcentration());
+	    	console.log(gwm.getSeaLevel());
+	    	console.log(gwm.getFloodingDistance());
 	    }
 
 	    return megamain;
