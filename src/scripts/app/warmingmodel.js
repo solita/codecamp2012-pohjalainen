@@ -42,18 +42,18 @@ define(['gwparameter'],
 
     // global warming etenee, kapitalismi mätänee
     GlobalWarmingModel.prototype.updateState = function() {
-        if (this.coConcentration > this.tempIncreasePoint) {
-            this.temperatureIncrease += ((this.coConcentration - this.tempIncreasePoint) / 500);
+        if (this.coConcentration > tempIncreasePoint) {
+            this.temperatureIncrease += ((this.coConcentration - tempIncreasePoint) / 500);
         }
-        if (this.temperatureIncrease > this.arcticIceMeltingPoint) {
-            this.seaLevel += ((this.temperatureIncrease - this.arcticIceMeltingPoint) / 100);
+        if (this.temperatureIncrease > arcticIceMeltingPoint) {
+            this.seaLevel += ((this.temperatureIncrease - arcticIceMeltingPoint) / 100);
         }
-        if (this.seaLevel > this.seaLevelMax) {
-            this.seaLevel = this.seaLevelMax;
+        if (this.seaLevel > seaLevelMax) {
+            this.seaLevel = seaLevelMax;
         }
-        
+
         this.coConcentration += 10; // TODO: real calculation        
-        this.floodingDistance = this.initialFloodingDistance + this.seaLevel * this.floodingPerSeaLevel;
+        this.floodingDistance = initialFloodingDistance + (this.seaLevel * floodingPerSeaLevel);
     }
 
 	return (GlobalWarmingModel);

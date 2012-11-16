@@ -1,0 +1,15 @@
+#ukko {
+	float: left;
+	width: 50%;
+}
+
+#sliders {
+	float: left;
+	width: 30%;
+	padding-left: 20px;
+}
+
+
+.wrapper {
+	width: 50%;
+}
