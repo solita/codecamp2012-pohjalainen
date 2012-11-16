@@ -5,14 +5,17 @@ define(['gwparameter'],
         var coConcentration; // current value 
         var seaLevel; // current sea level
         var floodingDistance; // current flooding distance;
+        var temperatureIncrease; // avg temp increase
 
         // calculation params      
         var initialCoConcentration = 200;
+        var initialTemperatureIncrease = 0;
         var initialFloodingDistance = 10; // 10 metriä rannasta normaalisti
         var coDecreaseFromSinks = 3000; // metsät yms. hiilinielut imee 
         var initialSeaLevel = 0;
         var seaLevelMax = 10; // 10 metriä jos kaikki jää sulaa
-        var arcticIceMeltingPoint = 300; // tästä alkaa sulaminen
+        var tempIncreasePoint = 300; // lämpötilan nousu
+        var arcticIceMeltingPoint = 0.3; // 0.3 celciusta -> tästä alkaa sulaminen
         var floodingPerSeaLevel = 10; // 10 metriä lisää tulviin per 1 metri sulanutta jäätä
 
 	// rakentaja
@@ -21,6 +24,7 @@ define(['gwparameter'],
         this.coConcentration = initialCoConcentration;
         this.floodingDistance = initialFloodingDistance;
         this.seaLevel = initialSeaLevel;
+        this.temperatureIncrease = initialTemperatureIncrease;
     	return (this);
 	}
 
@@ -38,15 +42,17 @@ define(['gwparameter'],
 
     // global warming etenee, kapitalismi mätänee
     GlobalWarmingModel.prototype.updateState = function() {
-        if (coConcentration > arcticIceMeltingPoint) {
-            seaLevel += ((coConcentration - arcticIceMeltingPoint) / 500);
+        if (coConcentration > tempIncreasePoint) {
+            temperatureIncrease += ((coConcentration - tempIncreasePoint) / 500);
+        }
+        if (temperatureIncrease > arcticIceMeltingPoint) {
+            seaLevel += ((temperatureIncrease - arcticIceMeltingPoint) / 100);
         }
         if (seaLevel > seaLevelMax) {
             seaLevel = seaLevelMax;
         }
         
-        coConcentration += 10; // TODO: real calculation
-
+        coConcentration += 10; // TODO: real calculation        
         floodingDistance = initialFloodingDistance + seaLevel * floodingPerSeaLevel;
     }
 
