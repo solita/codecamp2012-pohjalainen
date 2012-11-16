@@ -18,6 +18,9 @@ define(['gwparameter'],
 	// rakentaja
 	function GlobalWarmingModel(params) {
         this.params = params;
+        this.coConcentration = initialCoConcentration;
+        this.floodingDistance = initialFloodingDistance;
+        this.seaLevel = initialSeaLevel;
     	return (this);
 	}
 
@@ -35,7 +38,16 @@ define(['gwparameter'],
 
     // global warming etenee, kapitalismi mätänee
     GlobalWarmingModel.prototype.updateState = function() {
-        // TODO: modeloidaan modeloidaan
+        if (coConcentration > arcticIceMeltingPoint) {
+            seaLevel += ((coConcentration - arcticIceMeltingPoint) / 500);
+        }
+        if (seaLevel > seaLevelMax) {
+            seaLevel = seaLevelMax;
+        }
+        
+        coConcentration += 10; // TODO: real calculation
+
+        floodingDistance = initialFloodingDistance + seaLevel * floodingPerSeaLevel;
     }
 
 	return (GlobalWarmingModel);
