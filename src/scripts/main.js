@@ -6,7 +6,8 @@ require.config({
 	    urlArgs: "timestamp=" + new Date().getTime()
 })
 
-require(['lib/jquery-1.8.2.min', 'gwparameter'], 
+require(['jquery', 'gwparameter'], 
 	function($, gw) {
-		alert(gw.getMin());
+		$("#traktori").prop("min", gw.getMin());
+		$("#traktori").prop("max", gw.getMax());
 });
