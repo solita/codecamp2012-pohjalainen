@@ -52,10 +52,10 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 		   		statusImage ="harma1.jpg";
 		   	} else if (gwm.getTemperatureChange() < 1) {
 		   		statusImage = "luutonen6.jpg";
-		   	} else if (gwm.getTemperatureChange() < 1) {
-		   		statusimage="pohjalainen_ulkoilee.jpeg";
+		   	} else if (gwm.getTemperatureChange() < 2) {
+		   		statusImage="pohjalainen_ulkoilee.jpeg";
 		   	} else {
-		   		statusImage="tulvaa.jpg";
+		   		statusImage="harmastapoikiakymmenen1.jpg";
 		   	}
 		   	$("#statusimg").prop("src", "img/" + statusImage);
 	    }
