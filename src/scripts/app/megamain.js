@@ -31,9 +31,7 @@ define(['jquery', 'gwparameter', 'htmlutils', 'fpstimer', 'warmingmodel'],
 	    	}
 	    	gwm.updateState();
 
-	    	console.log(gwm.getCoConcentration());
-	    	console.log(gwm.getSeaLevel());
-	    	console.log(gwm.getFloodingDistance());
+	    	$("#status").text("pitoisuus: " + gwm.getCoConcentration() + ". Sea level: " + gwm.getSeaLevel() + ". Flooding distance: " + gwm.getFloodingDistance());
 	    }
 
 	    return megamain;
